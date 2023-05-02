@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.io Chat</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <label for="room-input">Room:</label>
+  <input id="room-input" type="text">
+  <button id="join-room-button">Join Room</button>
+
+  <ul id="messages"></ul>
+  <form id="chat-form">
+    <label for="message-input">Message:</label>
+    <input id="message-input" type="text">
+    <label for="recipient-input">To:</label>
+    <input id="recipient-input" type="text">
+    <button>Send</button>
+  </form>
+
+  <script>
+    const socket = io();
+
+    document.getElementById('join-room-button').addEventListener('click', () => {
+      const room = document.getElementById('room-input').value;
+      socket.emit('join room', room);
+    });
+
+    socket.on('chat message', (msg) => {
+      const li = document.createElement('li');
+      li.innerText = msg;
+      document.getElementById('messages').appendChild(li);
+    });
+
+    document.getElementById('chat-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = document.getElementById('message-input').value;
+      const to = document.getElementById('recipient-input').value;
+      socket.emit('chat message', { message, to });
+      document.getElementById('message-input').value = '';
+      document.getElementById('recipient-input').value = '';
+    });
+  </script>
+</body>
+</html>
