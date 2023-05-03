@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +8,9 @@
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <label for="room-input">Room:</label>
+  <!-- <label for="room-input">Group:</label>
   <input id="room-input" type="text">
-  <button id="join-room-button">Join Room</button>
+  <button id="join-room-button">Join Group</button> -->
 
   <ul id="messages"></ul>
   <form id="chat-form">
@@ -18,16 +18,16 @@
     <input id="message-input" type="text">
     <label for="recipient-input">To:</label>
     <input id="recipient-input" type="text">
-    <button>Send</button>
+    <button type="button">Send</button>
   </form>
 
   <script>
     const socket = io();
 
-    document.getElementById('join-room-button').addEventListener('click', () => {
-      const room = document.getElementById('room-input').value;
-      socket.emit('join room', room);
-    });
+    // document.getElementById('join-room-button').addEventListener('click', () => {
+    //   const room = document.getElementById('room-input').value;
+    //   socket.emit('join room', room);
+    // });
 
     socket.on('chat message', (msg) => {
       const li = document.createElement('li');

@@ -13,10 +13,10 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log(`New user connected: ${socket.id}`);
 
-  socket.on('join room', (room) => {
-    socket.join(room);
-    console.log(`${socket.id} joined room ${room}`);
-  });
+  // socket.on('join room', (room) => {
+  //   socket.join(room);
+  //   console.log(`${socket.id} joined room ${room}`);
+  // });
 
   socket.on('chat message', (data) => {
     console.log(`Message from ${socket.id}: ${data.message} (to ${data.to})`);
