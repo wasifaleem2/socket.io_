@@ -5,10 +5,14 @@ const socketIO = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
+const databaseConnect = require("./database/index")
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/clientNew.html');
 });
+
+databaseConnect();
 
 io.on('connection', (socket) => {
   console.log(`New user connected: ${socket.id}`);

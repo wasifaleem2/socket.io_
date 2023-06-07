@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
   <title>Socket.io Chat</title>
   <script src="/socket.io/socket.io.js"></script>
 </head>
+
 <body>
   <!-- <label for="room-input">Group:</label>
   <input id="room-input" type="text">
@@ -18,7 +20,7 @@
     <input id="message-input" type="text">
     <label for="recipient-input">To:</label>
     <input id="recipient-input" type="text">
-    <button type="button">Send</button>
+    <button id="chat-form-submit" type="submit">Send</button>
   </form>
 
   <script>
@@ -35,14 +37,18 @@
       document.getElementById('messages').appendChild(li);
     });
 
-    document.getElementById('chat-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const message = document.getElementById('message-input').value;
-      const to = document.getElementById('recipient-input').value;
-      socket.emit('chat message', { message, to });
-      document.getElementById('message-input').value = '';
-      document.getElementById('recipient-input').value = '';
+    document.getElementById('chat-form-submit').addEventListener('click', (e) => {
+      // if (e.target.tagName === 'BUTTON') {
+        e.preventDefault();
+        const message = document.getElementById('message-input').value;
+        const to = document.getElementById('recipient-input').value;
+        socket.emit('chat message', { message, to });
+        document.getElementById('message-input').value = '';
+        document.getElementById('recipient-input').value = '';
+      // }
     });
+
   </script>
 </body>
+
 </html>
